@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Cooking Conversions</title>
 </head>
 <body>
+<form th:action="@{/convert}" method="get">
+    <label for="firstAmount">Amount</label>
+    <input name="firstAmount" id="firstAmount" type="number" step=".1">
 
+    <label for="firstUnit">Unit</label>
+    <select name="firstUnit" id="firstUnit">
+        <option value="teaspoon">tsp</option>
+    </select>
+    <label for="secondUnit">Conversion</label>
+    <select name="secondUnit" id="secondUnit">
+        <option value="tablespoon">tbl</option>
+    </select>
+</form>
+<div th:text="${results}"></div>
 </body>
 </html>
