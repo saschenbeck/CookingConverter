@@ -11,12 +11,15 @@
 
     <label for="firstUnit">Unit</label>
     <select name="firstUnit" id="firstUnit">
-        <option value="teaspoon">tsp</option>
+        <option value="teaspoon(s)">tsp</option>
+        <option value="tablespoon(s)">tbsp</option>
     </select>
     <label for="secondUnit">Conversion</label>
     <select name="secondUnit" id="secondUnit">
-        <option value="tablespoon">tbl</option>
+        <option value="teaspoon(s)">tsp</option>
+        <option value="tablespoon(s)">tbsp</option>
     </select>
+    <input type="submit">
 </form>
 <div th:text="${results}"></div>
 </body>
