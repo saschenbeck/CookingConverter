@@ -69,7 +69,7 @@ public class ConversionsService {
 
     //Converts number of teaspoons to tablespoons
     public String teaspoonToTableSpoon(double numberOfTeaspoons, String teaspoons, String tablespoons){
-        double numberOfTableSpoons = Math.floor(numberOfTeaspoons/3);
+        double numberOfTableSpoons = tspToTbsp(numberOfTeaspoons);
         if (numberOfTeaspoons % 3 == 0){
             return noRemainderStatement(numberOfTeaspoons, teaspoons, numberOfTableSpoons, tablespoons);
         } else {
