@@ -52,6 +52,12 @@ public class ConversionsService {
         return Math.floor(numberOfTeaspoons/3);
     }
 
+    //Test Function
+    //Testing Tablespoons to Teaspoons
+    public double tbspToTsp(double numberOfTablespoons){
+        return Math.ceil(numberOfTablespoons*3);
+    }
+
     //Return String for when conversion results in only a whole number
     public String noRemainderStatement(double firstValue, String firstUnit, double secondValue, String secondUnit){
         return firstValue + " " +  firstUnit + " = " + secondValue + " " + secondUnit;
