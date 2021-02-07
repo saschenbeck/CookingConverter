@@ -19,4 +19,12 @@ public class ConverterTest {
         assertEquals(1.0, actual, 0);
         System.out.println("Test complete");
     }
+
+    @Test
+    public void tablespoonsToTeaspoonsEquals(){
+        System.out.println("Test Start");
+        double actual = conversionsService.tbspToTsp(1);
+        assertEquals(3.0, actual, 0);
+        System.out.println("Test Complete");
+    }
 }
