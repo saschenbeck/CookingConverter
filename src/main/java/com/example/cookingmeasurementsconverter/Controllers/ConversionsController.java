@@ -17,7 +17,7 @@ public class ConversionsController {
         return "home";
     }
 
-    @GetMapping("/convert")
+    @PostMapping("/convert")
     public String conversions(@RequestParam(value = "firstUnit") String firstUnit,
                               @RequestParam(value = "firstAmount") double firstAmount,
                               @RequestParam(value = "secondUnit") String secondUnit,
