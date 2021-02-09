@@ -5,7 +5,7 @@
     <title>Cooking Conversions</title>
 </head>
 <body>
-<form th:action="@{/convert}" method="get">
+<form th:action="@{/convert}" method="post">
     <label for="firstAmount">Amount</label>
     <input name="firstAmount" id="firstAmount" type="number" step=".1">
 
@@ -13,11 +13,13 @@
     <select name="firstUnit" id="firstUnit">
         <option value="teaspoon(s)">tsp</option>
         <option value="tablespoon(s)">tbsp</option>
+        <option value="cup(s)">cups</option>
     </select>
     <label for="secondUnit">Conversion</label>
     <select name="secondUnit" id="secondUnit">
         <option value="teaspoon(s)">tsp</option>
         <option value="tablespoon(s)">tbsp</option>
+        <option value="cup(s)">cups</option>
     </select>
     <input type="submit">
 </form>
