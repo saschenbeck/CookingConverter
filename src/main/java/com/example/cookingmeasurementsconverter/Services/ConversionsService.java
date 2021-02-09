@@ -1,5 +1,6 @@
 package com.example.cookingmeasurementsconverter.Services;
 
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -20,13 +21,19 @@ public class ConversionsService {
 
     //Selects correct function based on unit types
     public String selector(String firstUnit, double firstAmount, String secondUnit){
-        switch (firstUnit){
-            case "teaspoon(s)":
-                return nestedSwitchTsp(secondUnit, firstUnit, firstAmount);
-            case "tablespoon(s)":
-                return nestedSwitchTbsp(secondUnit, firstUnit, firstAmount);
-            default:
-                return "Something went wrong with this conversion";
+        if (firstUnit.equals(secondUnit)){
+            return noRemainderStatement(firstAmount, firstUnit, firstAmount, secondUnit);
+        } else {
+            switch (firstUnit) {
+                case "teaspoon(s)":
+                    return nestedSwitchTsp(secondUnit, firstUnit, firstAmount);
+                case "tablespoon(s)":
+                    return nestedSwitchTbsp(secondUnit, firstUnit, firstAmount);
+                case "cup(s)":
+                    return nestedSwitchCups(secondUnit, firstUnit, firstAmount);
+                default:
+                    return "Something went wrong with this conversion";
+            }
         }
     }
 
@@ -35,6 +42,8 @@ public class ConversionsService {
         switch (secondUnit){
             case "tablespoon(s)":
                 return teaspoonToTableSpoon(firstAmount, firstUnit, secondUnit);
+            case "cup(s)":
+                return teaspoonToCups(firstAmount, firstUnit, secondUnit);
             default:
                 return "Something went wrong with converting teaspoons";
         }
@@ -51,10 +60,30 @@ public class ConversionsService {
                 return "Something went wrong with converting tablespoons";
         }
     }
+
+    //Nested switch statement for converting cups into another unit
+    private String nestedSwitchCups(String secondUnit, String firstUnit, double firstAmount){
+        switch (secondUnit){
+            case "teaspoon(s)":
+                return "Converting cups to teaspoons";
+            case "tablespoons":
+                return "Converting cups to tablespoons";
+            default:
+                return "Something went wrong with converting cups";
+        }
+    }
+
+
     //Test Function
     //Testing Teaspoons to Tablespoons
     public double tspToTbsp(double numberOfTeaspoons){
         return Math.floor(numberOfTeaspoons/3);
+    }
+
+    //Test Function
+    //Testing Teaspoons to Cups
+    public double tspToCups(double numberOfTeaspoons){
+        return tbspToCups(tspToTbsp(numberOfTeaspoons));
     }
 
     //Test Function
@@ -67,6 +96,18 @@ public class ConversionsService {
     //Testing Tablespoons to Cups
     public double tbspToCups(double numberOfTablespoons){
             return Math.floor(numberOfTablespoons/16);
+    }
+
+    //Test Function
+    //Testing Cups to tablespoons
+    public double cupsToTbsp(double numberOfCups){
+        return Math.ceil(numberOfCups*16);
+    }
+
+    //Test Function
+    //Testing Cups to teaspoons
+    public double cupsToTsp(double numberOfCups){
+        return tbspToTsp(cupsToTbsp(numberOfCups));
     }
 
     //Return String for when conversion results in only a whole number
@@ -91,6 +132,16 @@ public class ConversionsService {
             return noRemainderStatement(numberOfTeaspoons, teaspoons, numberOfTableSpoons, tablespoons);
         } else {
            return remainderStatement(numberOfTeaspoons, teaspoons, numberOfTableSpoons, tablespoons, numberOfTeaspoons%3);
+        }
+    }
+
+    //Converts number of teaspoons to cups
+    public String teaspoonToCups(double numberOfTeaspoons, String teaspoons, String cups){
+        double numberOfCups = numberOfTeaspoons/48;
+        if (numberOfTeaspoons % 48 == 0 || numberOfTeaspoons % 48 == 24 || numberOfTeaspoons % 48 == 12){
+            return noRemainderStatement(numberOfTeaspoons, teaspoons, numberOfCups, cups);
+        } else {
+            return remainderStatement(numberOfTeaspoons, teaspoons, tspToCups(numberOfTeaspoons), cups, numberOfTeaspoons%48);
         }
     }
 
