@@ -6,8 +6,11 @@ import java.text.DecimalFormat;
 
 @Service
 public class ConversionsService {
-    //Keep outputs to only 1 decimal place
-    private final DecimalFormat numberFormat = new DecimalFormat("#.0");
+    //Keep outputs to only 2 decimal place
+    private final DecimalFormat twoDecimal = new DecimalFormat("#.00");
+
+    //Keeps outputs to only 3 decimal place
+    private final DecimalFormat threeDecimal = new DecimalFormat("#.000");
 
     //Round up a decimal to its next whole number
     //Currently all decimals will round up, follow up to see about using .25 to get more specific
@@ -42,6 +45,8 @@ public class ConversionsService {
         switch (secondUnit){
             case "teaspoon(s)":
                 return tablespoonsToTeaspoons(firstAmount, firstUnit, secondUnit);
+            case "cup(s)":
+                return tablespoonsToCups(firstAmount, firstUnit, secondUnit);
             default:
                 return "Something went wrong with converting tablespoons";
         }
@@ -58,6 +63,12 @@ public class ConversionsService {
         return Math.ceil(numberOfTablespoons*3);
     }
 
+    //Test Function
+    //Testing Tablespoons to Cups
+    public double tbspToCups(double numberOfTablespoons){
+            return Math.floor(numberOfTablespoons/16);
+    }
+
     //Return String for when conversion results in only a whole number
     public String noRemainderStatement(double firstValue, String firstUnit, double secondValue, String secondUnit){
         return firstValue + " " +  firstUnit + " = " + secondValue + " " + secondUnit;
@@ -70,7 +81,7 @@ public class ConversionsService {
 
     //Return string for when conversion results in a decimal
     public String remainderStatement(double firstValue, String firstUnit, double secondValue, String secondUnit, double remainingValue){
-        return firstValue + " " +  firstUnit + " ≈ " + secondValue + " " + secondUnit + " and " + numberFormat.format(remainingValue) + " "  + firstUnit;
+        return firstValue + " " +  firstUnit + " ≈ " + secondValue + " " + secondUnit + " and " + twoDecimal.format(remainingValue) + " "  + firstUnit;
     }
 
     //Converts number of teaspoons to tablespoons
@@ -89,6 +100,16 @@ public class ConversionsService {
             return approximateStatement(numberOfTablespoons, tablespoons, roundUp((numberOfTablespoons*3)), teaspoons);
         } else {
             return noRemainderStatement(numberOfTablespoons, tablespoons, numberOfTablespoons*3, teaspoons);
+        }
+    }
+
+    //Converts number of tablespoons to cups
+    public String tablespoonsToCups(double numberOfTablespoons, String tablespoons, String cups){
+        double numberOfCups = numberOfTablespoons/16;
+        if (numberOfTablespoons % 16 == 0 || numberOfTablespoons % 16 == 8 || numberOfTablespoons % 16 == 4){
+            return noRemainderStatement(numberOfTablespoons, tablespoons, numberOfCups, cups);
+        } else {
+            return remainderStatement(numberOfTablespoons, tablespoons, tbspToCups(numberOfTablespoons), cups, numberOfTablespoons%16);
         }
     }
 
