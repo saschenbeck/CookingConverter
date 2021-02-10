@@ -19,6 +19,15 @@ public class ConversionsService {
         return (Math.ceil(amount * 2) / 2);
     }
 
+    //Converting larger units to smaller
+    public String largeToSmall(double firstAmount, String firstUnit, String secondUnit, int multiplier){
+        if (firstAmount - Math.floor(firstAmount) != 0){
+            return approximateStatement(firstAmount, firstUnit, roundUp(firstAmount*multiplier), secondUnit);
+        } else {
+            return noRemainderStatement(firstAmount, firstUnit, firstAmount*multiplier, secondUnit);
+        }
+    }
+
     //Selects correct function based on unit types
     public String selector(String firstUnit, double firstAmount, String secondUnit){
         if (firstUnit.equals(secondUnit)){
@@ -65,7 +74,7 @@ public class ConversionsService {
     private String nestedSwitchCups(String secondUnit, String firstUnit, double firstAmount){
         switch (secondUnit){
             case "teaspoon(s)":
-                return "Converting cups to teaspoons";
+                return cupsToTeaspoons(firstAmount, firstUnit, secondUnit);
             case "tablespoons":
                 return "Converting cups to tablespoons";
             default:
@@ -147,11 +156,7 @@ public class ConversionsService {
 
     //Converts number of tablespoons to teaspoons
     public String tablespoonsToTeaspoons(double numberOfTablespoons, String tablespoons, String teaspoons){
-        if (numberOfTablespoons - Math.floor(numberOfTablespoons) != 0){
-            return approximateStatement(numberOfTablespoons, tablespoons, roundUp((numberOfTablespoons*3)), teaspoons);
-        } else {
-            return noRemainderStatement(numberOfTablespoons, tablespoons, numberOfTablespoons*3, teaspoons);
-        }
+        return largeToSmall(numberOfTablespoons, tablespoons, teaspoons, 3);
     }
 
     //Converts number of tablespoons to cups
@@ -162,6 +167,16 @@ public class ConversionsService {
         } else {
             return remainderStatement(numberOfTablespoons, tablespoons, tbspToCups(numberOfTablespoons), cups, numberOfTablespoons%16);
         }
+    }
+
+    //Converts number of cups to teaspoons
+    public String cupsToTeaspoons(double numberOfCups, String cups, String teaspoons){
+        return largeToSmall(numberOfCups, cups, teaspoons, 48);
+    }
+
+    //Converts number of cups to tablespoons
+    public String cupsToTablespoons(double numberOfCups, String cups, String teaspoons){
+        return "";
     }
 
 }
