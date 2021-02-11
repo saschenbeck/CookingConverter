@@ -75,8 +75,8 @@ public class ConversionsService {
         switch (secondUnit){
             case "teaspoon(s)":
                 return cupsToTeaspoons(firstAmount, firstUnit, secondUnit);
-            case "tablespoons":
-                return "Converting cups to tablespoons";
+            case "tablespoon(s)":
+                return cupsToTablespoons(firstAmount, firstUnit, secondUnit);
             default:
                 return "Something went wrong with converting cups";
         }
@@ -175,8 +175,8 @@ public class ConversionsService {
     }
 
     //Converts number of cups to tablespoons
-    public String cupsToTablespoons(double numberOfCups, String cups, String teaspoons){
-        return "";
+    public String cupsToTablespoons(double numberOfCups, String cups, String tablespoons){
+        return largeToSmall(numberOfCups, cups, tablespoons, 16);
     }
 
 }
