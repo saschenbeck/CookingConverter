@@ -86,4 +86,15 @@ public class ConverterTest {
         assertNotEquals(1.1, actual, 0);
         System.out.println(finish);
     }
+
+    @Test
+    public void cupsToTeaspoonsEquals(){
+        System.out.println(start);
+        double actual = conversionsService.cupsToTsp(1);
+        assertEquals(48, actual, 0);
+        checkpoint(1);
+        actual = conversionsService.cupsToTsp(1.1);
+        assertEquals(53, actual, 1);
+        System.out.println(finish);
+    }
 }
