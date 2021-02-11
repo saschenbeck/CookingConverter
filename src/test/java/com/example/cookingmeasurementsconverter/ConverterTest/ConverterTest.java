@@ -66,7 +66,7 @@ public class ConverterTest {
     }
 
     @Test
-    public void tablespoonsToCups(){
+    public void tablespoonsToCupsEquals(){
         System.out.println(start);
         double actual = conversionsService.tbspToCups(16);
         assertEquals(1, actual, 0);
@@ -76,6 +76,14 @@ public class ConverterTest {
         checkpoint(2);
         actual = conversionsService.tbspToCups(4);
         assertEquals(.25, actual, .25);
+        System.out.println(finish);
+    }
+
+    @Test
+    public void tablespoonsToCupsNotEquals(){
+        System.out.println(start);
+        double actual = conversionsService.tbspToCups(16);
+        assertNotEquals(1.1, actual, 0);
         System.out.println(finish);
     }
 }
