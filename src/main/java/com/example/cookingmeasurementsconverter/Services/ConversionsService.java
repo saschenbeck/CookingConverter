@@ -40,6 +40,8 @@ public class ConversionsService {
                     return nestedSwitchTbsp(secondUnit, firstUnit, firstAmount);
                 case "cup(s)":
                     return nestedSwitchCups(secondUnit, firstUnit, firstAmount);
+                case "ounces(s)":
+                    return nestedSwitchOunces(secondUnit, firstUnit, firstAmount);
                 default:
                     return "Something went wrong with this conversion";
             }
@@ -79,6 +81,20 @@ public class ConversionsService {
                 return cupsToTablespoons(firstAmount, firstUnit, secondUnit);
             default:
                 return "Something went wrong with converting cups";
+        }
+    }
+
+    //Nested switch statment for converting ounces to another unit
+    private String nestedSwitchOunces(String secondUnit, String firstUnit, double firstAmount){
+        switch (secondUnit){
+            case "teaspoons(s)":
+                return ouncesToTeaspoons(firstAmount, firstUnit, secondUnit);
+            case "tablespoon(s)":
+                return ouncesToTablespoons(firstAmount, firstUnit, secondUnit);
+            case "cup(s)":
+                return ouncesToCups(firstAmount, firstUnit, secondUnit);
+            default:
+                return "Something went wrong with converting ounces";
         }
     }
 
