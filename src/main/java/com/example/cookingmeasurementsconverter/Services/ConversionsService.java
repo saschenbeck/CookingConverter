@@ -20,7 +20,7 @@ public class ConversionsService {
     }
 
     //Converting larger units to smaller
-    public String largeToSmall(double firstAmount, String firstUnit, String secondUnit, int multiplier){
+    public String largeToSmall(double firstAmount, String firstUnit, String secondUnit, double multiplier){
         if (firstAmount - Math.floor(firstAmount) != 0){
             return approximateStatement(firstAmount, firstUnit, roundUp(firstAmount*multiplier), secondUnit);
         } else {
@@ -40,7 +40,7 @@ public class ConversionsService {
                     return nestedSwitchTbsp(secondUnit, firstUnit, firstAmount);
                 case "cup(s)":
                     return nestedSwitchCups(secondUnit, firstUnit, firstAmount);
-                case "ounces(s)":
+                case "ounce(s)":
                     return nestedSwitchOunces(secondUnit, firstUnit, firstAmount);
                 default:
                     return "Something went wrong with this conversion";
@@ -135,6 +135,24 @@ public class ConversionsService {
         return tbspToTsp(cupsToTbsp(numberOfCups));
     }
 
+    //Test Function
+    //Testing Ounces to teaspoons
+    public double ozToTsp(double numberOfOunces){
+        return cupsToTsp(ozToCups(numberOfOunces));
+    }
+
+    //Test Function
+    //Testing Ounces to Tablespoons
+    public double ozToTbsp(double numberOfOunces){
+        return cupsToTbsp(ozToCups(numberOfOunces));
+    }
+
+    //Test Function
+    //Testing OUnces to Cups
+    public double ozToCups(double numberOfOunces){
+        return Math.floor(numberOfOunces/8);
+    }
+
     //Return String for when conversion results in only a whole number
     public String noRemainderStatement(double firstValue, String firstUnit, double secondValue, String secondUnit){
         return firstValue + " " +  firstUnit + " = " + secondValue + " " + secondUnit;
@@ -193,6 +211,26 @@ public class ConversionsService {
     //Converts number of cups to tablespoons
     public String cupsToTablespoons(double numberOfCups, String cups, String tablespoons){
         return largeToSmall(numberOfCups, cups, tablespoons, 16);
+    }
+
+    //Converts number of ounces to cups
+    public String ouncesToCups(double numberOfOunces, String ounces, String cups){
+        double numberOfCups = numberOfOunces/8;
+        if (numberOfOunces % 8 == 0 || numberOfOunces % 8 == 4 || numberOfOunces % 8 == 2){
+            return noRemainderStatement(numberOfOunces, ounces, numberOfCups, cups);
+        } else {
+            return remainderStatement(numberOfOunces, ounces, ozToCups(numberOfOunces), cups, numberOfOunces%8);
+        }
+    }
+
+    //Converts number of ounces to tablespoons
+    public String ouncesToTablespoons(double numberOfOunces, String ounces, String tablespoons){
+        return largeToSmall(numberOfOunces, ounces, tablespoons, .5);
+    }
+
+    //Converts number of ounces to teaspoons
+    public String ouncesToTeaspoons(double numberOfOunces, String ounces, String teaspoons){
+        return largeToSmall(numberOfOunces, ounces, teaspoons, .167);
     }
 
 }
