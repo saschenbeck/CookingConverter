@@ -136,6 +136,12 @@ public class ConversionsService {
     }
 
     //Test Function
+    //Testing Cups to ounces
+    public double cupsToOz(double numberOfCups){
+        return Math.ceil(numberOfCups*8);
+    }
+
+    //Test Function
     //Testing Ounces to teaspoons
     public double ozToTsp(double numberOfOunces){
         return cupsToTsp(ozToCups(numberOfOunces));
