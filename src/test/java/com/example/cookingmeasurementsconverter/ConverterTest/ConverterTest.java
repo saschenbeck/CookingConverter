@@ -103,6 +103,9 @@ public class ConverterTest {
         System.out.println(start);
         double actual = conversionsService.cupsToTsp(1);
         assertNotEquals(49, actual, 0);
+        checkpoint(1);
+        actual = conversionsService.cupsToTsp(1.1);
+        assertNotEquals(48, actual, 0);
         System.out.println(finish);
     }
 }
