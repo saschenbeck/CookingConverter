@@ -148,7 +148,7 @@ public class ConversionsService {
     }
 
     //Test Function
-    //Testing OUnces to Cups
+    //Testing Ounces to Cups
     public double ozToCups(double numberOfOunces){
         return Math.floor(numberOfOunces/8);
     }
@@ -211,6 +211,11 @@ public class ConversionsService {
     //Converts number of cups to tablespoons
     public String cupsToTablespoons(double numberOfCups, String cups, String tablespoons){
         return largeToSmall(numberOfCups, cups, tablespoons, 16);
+    }
+
+    //Converts number of cups to ounces
+    public String cupsToOunces(double numberOfCups, String cups, String ounces){
+        return largeToSmall(numberOfCups, cups, ounces, 8);
     }
 
     //Converts number of ounces to cups
