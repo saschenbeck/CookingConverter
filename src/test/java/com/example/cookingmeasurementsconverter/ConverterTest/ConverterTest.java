@@ -114,6 +114,12 @@ public class ConverterTest {
         System.out.println(start);
         double actual = conversionsService.cupsToOz(1);
         assertEquals(8, actual, 0);
+        checkpoint(1);
+        actual = conversionsService.cupsToOz(2);
+        assertEquals(16, actual, 0);
+        checkpoint(2);
+        actual = conversionsService.cupsToOz(1.5);
+        assertEquals(12, actual, 0);
         System.out.println(finish);
     }
 }
