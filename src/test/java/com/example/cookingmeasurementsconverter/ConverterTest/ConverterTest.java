@@ -128,6 +128,12 @@ public class ConverterTest {
         System.out.println(start);
         double actual = conversionsService.cupsToOz(1);
         assertNotEquals(7, actual, 0);
+        checkpoint(1);
+        assertNotEquals(9, actual, 0);
+        checkpoint(2);
+        assertNotEquals(7.9, actual, 0);
+        checkpoint(3);
+        assertNotEquals(8.1, actual, 0);
         System.out.println(finish);
     }
 }
