@@ -142,6 +142,9 @@ public class ConverterTest {
         System.out.println(start);
         double actual = conversionsService.ozToCups(8);
         assertEquals(1, actual, 0);
+        checkpoint(1);
+        actual = conversionsService.ozToCups(16);
+        assertEquals(2, actual, 0);
         System.out.println(finish);
     }
 }
