@@ -122,4 +122,12 @@ public class ConverterTest {
         assertEquals(12, actual, 0);
         System.out.println(finish);
     }
+
+    @Test
+    public void cupsToOuncesNotEquals(){
+        System.out.println(start);
+        double actual = conversionsService.cupsToOz(1);
+        assertNotEquals(7, actual, 0);
+        System.out.println(finish);
+    }
 }
