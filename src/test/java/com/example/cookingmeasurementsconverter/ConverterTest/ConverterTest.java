@@ -164,6 +164,10 @@ public class ConverterTest {
         System.out.println(start);
         double actual = conversionsService.ozToTbsp(8);
         assertEquals(16, actual, 0);
+        checkpoint(1);
+        actual = conversionsService.ozToTbsp(12);
+        assertEquals(24, actual, 0);
+
         System.out.println(finish);
     }
 }
