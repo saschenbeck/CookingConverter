@@ -170,4 +170,12 @@ public class ConverterTest {
 
         System.out.println(finish);
     }
+
+    @Test
+    public void ouncesToTbspNotEquals(){
+        System.out.println(start);
+        double actual = conversionsService.ozToTbsp(8);
+        assertNotEquals(15, actual, 0);
+        System.out.println(finish);
+    }
 }
