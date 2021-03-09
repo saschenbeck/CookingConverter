@@ -178,4 +178,11 @@ public class ConverterTest {
         assertNotEquals(15, actual, 0);
         System.out.println(finish);
     }
+
+    @Test
+    public void ouncesTsp(){
+        System.out.println(start);
+        double actual = conversionsService.ozToTsp();
+        System.out.println(finish);
+    }
 }
