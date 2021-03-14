@@ -182,7 +182,8 @@ public class ConverterTest {
     @Test
     public void ouncesTsp(){
         System.out.println(start);
-        double actual = conversionsService.ozToTsp();
+        double actual = conversionsService.ozToTsp(8);
+        assertEquals(48, actual, 0);
         System.out.println(finish);
     }
 }
